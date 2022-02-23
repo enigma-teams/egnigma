@@ -38,12 +38,34 @@ def load_params():
         init_rotor_and_reflector(**json.load(p))
 
 
+def encrypt(letter, key, selector_direction):
+    global rotor
+    for name in list(rotor.keys())[::selector_direction]:
+        letter_index = list(rotor.get(name)).index(letter)
+        if letter_index + key <= len(rotor.get(name)) - 1:
+            letter = rotor.get(name)[letter_index + key]
+        else:
+            letter = rotor.get(name)[letter_index + key - len(rotor.get(name))]
+        rotor_permute(name, key)
+    return letter
+
+
+def rotor_permute(rotor_name, key):
+    global rotor
+    rotor_value = list(rotor.get(rotor_name))
+    for i in range(key):
+        rotor_value.insert(0, rotor_value[-1])
+        rotor_value.pop(-1)
+
+    rotor.update({rotor_name: "".join(rotor_value)})
+
+
 def init_rotor_and_reflector(rotors, reflecteurs):
     """ Setting the states of rotors """
     global rotor
     global reflector
-    rotor = rotors
-    reflector = reflecteurs
+    rotor = {key: rotors.get(key) for key in sorted(rotors)}
+    reflector = {key: rotors.get(key) for key in sorted(reflecteurs)}
 
 
 def menu():
@@ -54,11 +76,7 @@ def menu():
 
     load_params()
 
-    print (reflector)
-
-    mes = "Nouveau message"
-
-    save_message(save_file, mes)
+    save_message(save_file, "".join(encrypt(str(m), 3, 1) for m in message))
     print (message)
 
 
