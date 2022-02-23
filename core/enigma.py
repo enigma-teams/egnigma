@@ -42,11 +42,9 @@ def encrypt(letter, key, selector_direction):
     global rotor
     for name in list(rotor.keys())[::selector_direction]:
         letter_index = list(rotor.get(name)).index(letter)
-        if letter_index + key <= len(rotor.get(name)) - 1:
-            letter = rotor.get(name)[letter_index + key]
-        else:
-            letter = rotor.get(name)[letter_index + key - len(rotor.get(name))]
+        letter = rotor.get(name)[(letter_index + key) % 25]
         rotor_permute(name, key)
+    make_reflector(letter, 1)
     return letter
 
 
@@ -60,12 +58,19 @@ def rotor_permute(rotor_name, key):
     rotor.update({rotor_name: "".join(rotor_value)})
 
 
+def make_reflector(character, selector_direction):
+    global reflector
+    for key, val in zip(*[list(str(v)) for v in reflector.values()[::selector_direction]]):
+        if key == character:
+            yield val
+
+
 def init_rotor_and_reflector(rotors, reflecteurs):
     """ Setting the states of rotors """
     global rotor
     global reflector
     rotor = {key: rotors.get(key) for key in sorted(rotors)}
-    reflector = {key: rotors.get(key) for key in sorted(reflecteurs)}
+    reflector = {key: reflecteurs.get(key) for key in sorted(reflecteurs)}
 
 
 def menu():
