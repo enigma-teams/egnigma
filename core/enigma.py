@@ -69,10 +69,13 @@ def begin_save_message():
 
 
 def begin_encrypt():
+
+    """ Load settings in rotor.init """
     data.load_params(settings_file)
     for i, r in enumerate(data.rotor.keys()):
         print (f"{i+1} - {r}")
 
+    # User select 3 rotors
     selected_rotor = []
     for i in range(3):
         rotor_choice = "0"
@@ -81,9 +84,48 @@ def begin_encrypt():
         selected_rotor.append(rotor_choice)
 
 
-    selected_rotor = [r for i, r in enumerate(data.rotor.keys()) if str(i) in selected_rotor]
+    def trie():
+        for se in selected_rotor:
+            for ind, rot in enumerate(data.rotor.keys()):
+                if str(ind+1) == se:
+                    yield rot
 
-    print (selected_rotor)
+    selected_rotor = list(trie())
+
+    print (f"Rotors : {selected_rotor}")
+
+    # User select reflector
+    for i, rf in enumerate(data.reflector.keys()):
+        print (f"{i + 1} - {rf}")
+
+    reflector_choice = "0"
+    while reflector_choice not in [str(r+1) for r in range(len(data.reflector.keys()))]:
+        reflector_choice = str(input(f"Reflector = "))
+
+    reflector_choice = [r for i, r in enumerate(data.reflector.keys()) if str(i+1) == reflector_choice][0]
+
+    print (f"Rflector = {reflector_choice}")
+
+    # Message to encrypt
+    message = input("Message = ")
+
+    file_name = input("Fichier = ")
+
+    data.save_message(f"{file_name}.txt", message)
+
+    out = []
+
+    data.select_main_rotor_and_reflector(selected_rotor, reflector_choice)
+
+    data.lecture_message(f"{file_name}.txt", out)
+
+    print (f"message = {out[0]}")
+
+    en = []
+    enigma_machine(out[0], en)
+
+    print (f"message codé : {''.join(en)}")
+
 
 
 operations = {
