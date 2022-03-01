@@ -41,7 +41,7 @@ Avec ses exemple de paramètres la première saisie de la lettre <b>A</b> sera c
 |PERMUTATION DES ROTORS (rotor_permute) | rotor_name et key | permet de permuter chaque rotor aprés qu'un caractére y soit passé en prenant un nombre de carctére(nombre etant egale a la clés)au debut de la chaine puis le renvoie en fin de chaine  |
 |FONCTION DU REFLECTEUR (make_reflector)  | character et key  | lorque le charactére arrive au niveau du reflecteur elle se repere dans le reflecteur puis prends son indice et l'additionne a la clés pour trouvé la nouvelle correspondances en sortie du caractére en entrée  |
 
-### Présentation
+### Application
 
 | Fonctionnalité | Fonction    | Parameètre  | Description   |
 | :--- | :---        |    :----:   |          :--- |
@@ -49,6 +49,22 @@ Avec ses exemple de paramètres la première saisie de la lettre <b>A</b> sera c
 |Sauvegarde le message | begin_save_message   | Aucun        | Sauvegarde le message à crypter, utilisateur sasie le message et le nom du fichier dans le quel le message sera sauvegarder      |
 |Encryptage et Décriptage | begin_encrypt      | Aucun       | Début du cryptage,  chargement des `données`, l'utilisateur sélectionne les rotors et le réflecteur, saisie le message et le fichier de sauvegarde du méssage  |
 |Quitter le programme| exit      | Aucun       | Quitte le programme  |
+
+### LOGIQUE
+| Fonction    | Parametres  | Descriptions  |
+| :---        |    :----:   |          :--- |
+| INITIATEUR DE CRYPTAGE(Begin_encrypt) |     /   | Fonction mère contenant toutes les autres fonctions ci-dessous. Permet le démarrage du cryptage en faisant appel aux fonctions ci-dessous|
+| Téléchargement des paramètres (Data.load_params )| Settings_file     | Permet d’afficher la liste des rotors disponibles     |
+|Sélections des rotors(Selected_rotor)   |Tableau    |Demande a l’utilisateur de choisir 03 rotors et vérifie si sont choix est dans la liste ; après le choix d’un rotor il le retire de la liste pour que l’utilisateur n’est pas des rotors semblable dans son tableau|
+|Ordre des rotors (trie) | /  | S’assure que l’ordre des choix des rotors soit égal à l’ordre de leur position ensuite le met dans la liste |
+|Sélection du réflecteur (Reflector_choice) | dictionnaire  | Parcours la liste des réflecteurs et demande a l’utilisateur d’entrer la chaine caractère correspondant au réflecteur choisie et met dans un dictionnaire le réflecteur choisie  |
+|Message a crypté | Message = input (‘‘message= ’’)  | Demande a l’utilisateur d’entrer son message a encrypté/décrypté  |
+|Fichier du message a crypté | File_name = input (‘‘fichier= ’’) | Demande a l’utilisateur d’entrer du fichier contenant le message a encrypté/décrypté |
+|Sauvegarde du message (Data.save_message)  | (F ‘‘{file_name}.txt, message)et Out = [ ]  |Sauvegarde le message d’entrer/de sortie dans un fichier |
+|Sélections de rotors et réflecteur(Data.select_main_rotor_and_reflector) | Selected_rotor et Reflector_choice |Permet de faire appel au rotor et réflecteur sélectionné dans la fonction Begin_encrypt|
+|Lecture du message (Data.lecture_message) | F ‘‘{file_name}.Txt et out |Prends le message contenue dans le fichier et l’écrit dans la partie réservé au message a encrypté/décrypté|
+|Machine d’encryptage CESAR (Enigma_machine) | Out [0] et en |Fonction codage et décodage d’un message selon le positionnement des rotors et du réflecteur|
+
 
 # Tests
 
