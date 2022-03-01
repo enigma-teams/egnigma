@@ -172,3 +172,6 @@ Process finished with exit code 0
 
 # Bibliographie
 
+How to build an enigma machine virtualisation in python. (2021). Medium. Consulté le 2022, à l’adresse https://medium.com/analytics-vidhya/how-to-build-an-enigma-machine-virtualisation-in-python-b5476a1fd922
+
+Python 3 : des fondamentaux aux concepts avancés du langage. (s. d.). Python 3 : des fondamentaux aux concepts avancés du langage. Consulté le 2022, à l’adresse https://lms.fun-mooc.fr/courses/course-v1:UCA+107001+session02/info
