@@ -3,10 +3,6 @@ import data
 
 settings_file = "rotors.init"
 
-message_file = "message.txt"
-
-save_file = "sent.txt"
-
 
 def enigma_machine(message_in, message_out, key=3):
     """
@@ -33,13 +29,6 @@ def enigma_machine(message_in, message_out, key=3):
 
 def get_use_rotor(keys):
     return [str(data.rotor[key]) for key in data.rotor if key in keys]
-
-
-def rotor_permute(rotor, key):
-    for i in range(key):
-        rotor.insert(0, rotor[-1])
-        rotor.pop(-1)
-    return "".join(rotor)
 
 
 def begin_lecture_message():
@@ -104,7 +93,7 @@ def begin_encrypt():
 
     reflector_choice = [r for i, r in enumerate(data.reflector.keys()) if str(i+1) == reflector_choice][0]
 
-    print (f"Rflector = {reflector_choice}")
+    print (f"Reflector = {reflector_choice}")
 
     # Message to encrypt
     message = input("Message = ")
