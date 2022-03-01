@@ -24,6 +24,8 @@ Avec ses exemple de paramètres la première saisie de la lettre <b>A</b> sera c
 
 # Diagramme de flux fonctionnel 
 
+Yves
+
 # Interface de programmation 
 
 # Tests
