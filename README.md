@@ -16,8 +16,6 @@ Le <b>décryptage /cryptage</b> se fait grâce au paramètres fournis par utilis
 - Une clé (Ex : k = 3)
 - Un réflecteur (Ex : RFB)
 
-Avec ses exemple de paramètres la première saisie de la lettre <b>A</b> sera crypté/décrypté en <b>J</b>
-
 # Stratégie de résolution - Méthodologie 
 
 Afin de mener à bien notre projet il était nécessaire de commencé par nous poser des questions sur plusieurs plans.
