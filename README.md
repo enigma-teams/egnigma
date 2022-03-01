@@ -50,6 +50,9 @@ Avec ses exemple de paramètres la première saisie de la lettre <b>A</b> sera c
 |Encryptage et Décriptage | begin_encrypt      | Aucun       | Début du cryptage,  chargement des `données`, l'utilisateur sélectionne les rotors et le réflecteur, saisie le message et le fichier de sauvegarde du méssage  |
 |Quitter le programme| exit      | Aucun       | Quitte le programme  |
 
+### LOGIQUE
+
+![ENIGMA](FONCTION.docx)
 # Tests
 
 # Questions 
