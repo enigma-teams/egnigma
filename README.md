@@ -169,6 +169,9 @@ Process finished with exit code 0
 # Questions 
 
 # Conclusion 
+Enigma est une machine de cryptage CESAR creer vers la seconde Guerre mondiale elle consiste a entrer un message a l'aide d'un clavier et d'obtenir en sortie se message crypté.en effet lors de notre travail il nous a été difficile de s'entendre sur une idée definitive vue qu'on était tous en distanciel alors l'on a due se retrouvé une ou deux fois en presentiel ou l'on a sortie un plan detaillé du projet un chef de groupe et partagé les pages a faire sur le code et aprés cela,il nous a été facile de resoudre le projet.
+Aprés avoir fini le code l'on c'est rendue compte qu'il ne nous était pas utile de faire une autre fonction de décryptage mais que la meme fonction nous permettra de decrypté;mais nous avons rencontrer des problemes au niveau de décryptage lorsque l'on introduit le message crypté en sortie dans le programme l'on n'obtient pas comme le resultat le message de depart; nous avons essayer de nous documenter sur le web et de revoir notre code au niveau des rotors et reflecteurs.
+ce programme a été un grand challenge pour nous;mais elle nous a appris a maitriser diverse methode attachés au liste tableau fonction etc... 
 
 # Bibliographie
 
