@@ -94,10 +94,11 @@ les différentes erreurs et appliquer les actions correctives
 # Tests
 Dans cette rubrique, nous devrons réaliser des tests afin d'évaluer notre programme.
 
-Tout d'abord il est nécessaire de créer un ficher ".txt" qui sera stocké dans le même
-dossier que celui du code source de notre programme.
+Tout d'abord le est l'une des parties des plus importante du programme car c'est ici que l'on vérifie sous défférents axes si le code réalisé est optimal
 
-**une fois le programme lancé ici on faisant le choix=2 nous effectuons l'enregistrement du Message**
+- une fois le programme lancé la rubrique "menu de sélection" s'affiche et là nous avons la possibilité de faire un choix sur l'action que nous désirons entreprendre. 
+Ici en faisant le choix=2 nous effectuons l'enregistrement du Message
+
 Menu de sélection
 
 1 - Lecture Message
@@ -112,13 +113,15 @@ choix = 2
 
 Message = bonjour
 
-**Une fois le message écrit, le programme demande d'entrer le fichier de sauvegarde et le message est enregistré automatiquement dans le fichier**
+
+- Une fois le message écrit, le programme demande d'entrer le fichier de sauvegarde et le message est enregistré automatiquement dans le fichier.
 
 Fichier de sauvegarde = bonjour.txt
 
 Le message bonjour a été sauvegarder dans le fichier bonjour.txt.txt
 
-**une fois le message ecrit et sauvegardé dans le fichier, de nouveau le menu de sélection apparait et ici on procède à la lecture du fichier**
+
+- une fois le message ecrit et sauvegardé dans le fichier, de nouveau le menu de sélection apparait et ici on procède à la lecture du fichier
 
 Menu de sélection
 
@@ -136,7 +139,8 @@ File Name : bonjour.txt
 
 ['BONJOUR']
 
-**Lorsque le fichier a été lu, de nouveau le menu de sélection apparait et là il faut choisir entre cryptage et décryptoage en entrant le choix= 3 ainsi le programme realise soit le cryptage ou le décryptage**
+
+- Lorsque le fichier a été lu, de nouveau le menu de sélection apparait et là il faut choisir entre cryptage et décryptoage en entrant le choix= 3 ainsi le programme realise soit le cryptage ou le décryptage
 
 Menu de sélection
 
@@ -151,7 +155,7 @@ Menu de sélection
 choix = 3
 
 
-**Ce qui suit est le choix des rotors et par défaut il faut choisir 3 parmis les 5 rotors**
+- Ce qui suit est le choix des rotors et par défaut il faut choisir 3 parmis les 5 rotors. la fonction permute realisera la rotation des différents rotors en fonction de la clés.
 
 1 - RA
 
@@ -171,7 +175,8 @@ Rotor 3 = 3
 
 Rotors : ['RA', 'RB', 'RC']
 
-**Après avoir réalisé le choix des rotors nous devons éffectuer le choix du reflecteur et c'est ici que sera etablit une correspondante entre le message écrit et le cryptage et puis renvérra le message crypté**
+
+- Après avoir réalisé le choix des rotors nous devons éffectuer le choix du reflecteur et c'est ici que sera etablit une correspondante entre le message écrit et le cryptage et puis renvérra le message crypté
 
 1 - RFA
 
