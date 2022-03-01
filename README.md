@@ -29,6 +29,7 @@ Avec ses exemple de paramètres la première saisie de la lettre <b>A</b> sera c
 # Interface de programmation 
 
 ### Data
+
 | Fonction    | Parametres  | Descriptions  |
 | :---        |    :----:   |          :--- |
 | GENERATEUR(generate)    |     it (iterateur)      | cette fonction permet de verifier les caractére du message entré et donc si un caractere est accentué il retire sont accent|
@@ -39,6 +40,16 @@ Avec ses exemple de paramètres la première saisie de la lettre <b>A</b> sera c
 | SELECTION DE ROTOR ET REFLECTEUR (select_main_rotor_and_reflector) | selected_rotor et selected_reflector  | permet de faire le choix de 03 rotors parmis les 05 presents et aussi le choix d'un reflecteur parmis les 02 presents et sa utilise l'ordre du choix respectivement sur l'ordre des rotors  |
 |PERMUTATION DES ROTORS (rotor_permute) | rotor_name et key | permet de permuter chaque rotor aprés qu'un caractére y soit passé en prenant un nombre de carctére(nombre etant egale a la clés)au debut de la chaine puis le renvoie en fin de chaine  |
 |FONCTION DU REFLECTEUR (make_reflector)  | character et key  | lorque le charactére arrive au niveau du reflecteur elle se repere dans le reflecteur puis prends son indice et l'additionne a la clés pour trouvé la nouvelle correspondances en sortie du caractére en entrée  |
+
+### Présentation
+
+| Fonctionnalité | Fonction    | Parameètre  | Description   |
+| :--- | :---        |    :----:   |          :--- |
+|Lecture du message | begin_lecture_message      | Aucun       | Li le message contenu dans un fichier, si le fichier est introuvable le programme affiche fichier indisponible  |
+|Sauvegarde le message | begin_save_message   | Aucun        | Sauvegarde le message à crypter, utilisateur sasie le message et le nom du fichier dans le quel le message sera sauvegarder      |
+|Encryptage et Décriptage | begin_encrypt      | Aucun       | Début du cryptage,  chargement des `données`, l'utilisateur sélectionne les rotors et le réflecteur, saisie le message et le fichier de sauvegarde du méssage  |
+|Quitter le programme| exit      | Aucun       | Quitte le programme  |
+
 # Tests
 
 # Questions 
