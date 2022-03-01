@@ -95,6 +95,8 @@ def begin_encrypt():
 
     print (f"Reflector = {reflector_choice}")
 
+    key = int(input("key = "))
+
     # Message to encrypt
     message = input("Message = ")
 
@@ -111,7 +113,7 @@ def begin_encrypt():
     print (f"message = {out[0]}")
 
     en = []
-    enigma_machine(out[0], en)
+    enigma_machine(out[0], en, key)
 
     print (f"message codé : {''.join(en)}")
 
