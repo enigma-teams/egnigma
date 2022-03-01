@@ -20,6 +20,33 @@ Avec ses exemple de paramètres la première saisie de la lettre <b>A</b> sera c
 
 # Stratégie de résolution - Méthodologie 
 
+Afin de mener à bien notre projet il était nécessaire de commencé par nous poser des questions sur plusieurs plans.
+
+Pourquoi le problème est survenu:
+en effet il etait question de pouvoir établir des communications entre des personnes de manière sécurisé afin que des personnes non authorisés ne puissent avoir accès.
+
+Méthodologie de résolution
+
+évaluer l'urgence du problème fixé le délais 
+
+* tout d'abord il fallait trouver les grands axes, 
+nottament ressencé les différents élements dont nous aurons besoin et leur principe de fonctionnement
+il s'agit ici des 
+Rotors, 
+les reflecteur, 
+la clé, 
+le message à coder ou décoder
+
+* Par la suite, l'écriture de divers algorithmes et suivant les différentes méthodes trouvées, 
+choisir celui qui compte moins de ligne et qui est le moins complexe.
+et puis cas par cas écrire un algorithme.
+
+* Par la suite nous realisons des différents tests afin d'évaluer le programme et vérifié
+les différentes erreurs et appliquer les actions correctives
+
+* En fin procéder à la traduction de l'algorithme en programme et réaliser le test final.
+
+
 # Algorithmique
 
 # Diagramme de flux fonctionnel 
