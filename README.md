@@ -30,6 +30,16 @@ Avec ses exemple de paramètres la première saisie de la lettre <b>A</b> sera c
 
 ### Data
 
+### Présentation
+
+| Fonctionnalité | Fonction    | Parameètre  | Description   |
+| :--- | :---        |    :----:   |          :--- |
+|Lecture du message | begin_lecture_message      | Aucun       | Li le message contenu dans un fichier, si le fichier est introuvable le programme affiche fichier indisponible  |
+|Sauvegarde le message | begin_save_message   | Aucun        | Sauvegarde le message à crypter, utilisateur sasie le message et le nom du fichier dans le quel le message sera sauvegarder      |
+|Encryptage et Décriptage | begin_encrypt      | Aucun       | Début du cryptage,  chargement des `données`, l'utilisateur sélectionne les rotors et le réflecteur, saisie le message et le fichier de sauvegarde du méssage  |
+|Quitter le programme| exit      | Aucun       | Quitte le programme  |
+
+
 # Tests
 
 # Questions 
