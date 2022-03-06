@@ -124,6 +124,7 @@ def begin_save_message():
 def begin_encrypt():
     """ Load settings in rotor.init """
     data.load_params(settings_file)
+
     for i, r in enumerate(data.rotor.keys()):
         print (f"{i+1} - {r}")
 

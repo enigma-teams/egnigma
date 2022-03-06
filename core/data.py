@@ -6,18 +6,17 @@ rotor = {}
 reflector = {}
 
 
-def generate(it):
-    for line in it:
-        i = ("".join(
-            d for d in unicodedata.normalize("NFD", str("".join(line.split())))
-            if unicodedata.category(d) != "Mn"))
-        if i:
-            yield i.upper()
-
-
 def lecture_message(filename, result):
+    def word_generator(it):
+        for line in it:
+            i = ("".join(
+                d for d in unicodedata.normalize("NFD", str("".join(line.split())))
+                if unicodedata.category(d) != "Mn"))
+            if i:
+                yield i.upper()
+
     with open(filename) as f:
-        g = generate(f)
+        g = word_generator(f)
         result.append("".join(g))
 
 
@@ -27,16 +26,16 @@ def save_message(file_name, message_in):
 
 
 def load_params(settings_file):
+    """ Setting the states of rotors """
+
+    def init_rotor_and_reflector(rotors, reflecteurs):
+        global rotor
+        global reflector
+        rotor = {str(k): str(rotors.get(k)) for k in rotors}
+        reflector = {str(k): str(reflecteurs.get(k)) for k in reflecteurs}
+
     with open(settings_file, 'r') as p:
         init_rotor_and_reflector(**json.load(p))
-
-
-def init_rotor_and_reflector(rotors, reflecteurs):
-    """ Setting the states of rotors """
-    global rotor
-    global reflector
-    rotor = {str(k): str(rotors.get(k)) for k in rotors}
-    reflector = {str(k): str(reflecteurs.get(k)) for k in reflecteurs}
 
 
 def select_main_rotor_and_reflector(selected_rotor=["RA", "RB", "RC"], selected_reflector="RFB"):
