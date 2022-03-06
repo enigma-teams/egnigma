@@ -82,6 +82,69 @@ les différentes erreurs et appliquer les actions correctives
   <li>Je determine la lettre de cette position de  dans l'alphabet</li>
 </ul>
 
+
+### Algorithm pour determiner position
+
+```
+fonction :position_L(L:caracter,index:Caracter):entier
+  var: i:entier
+       posi:entier
+  Debut 
+    pour i allant de 1 a 26 faire
+      si index[i]=L alors
+          posi=i
+      finsi 
+    fin pour
+   return posi
+  fin fonction
+
+```
+
+### Algorithm pour pivoter rotor
+
+```
+Procedure: permute(Var Index:carac)
+  var: permut:entier
+ Debut
+  permut=rotor_permut(List:chaine)
+ Fin Procedure
+
+```
+
+### Algorithm pour correspondre 
+
+```
+Fonction: correspondre(index:carac,posi)
+  var : i : entier
+        L : carac
+        index:carac
+        W:caracter
+  Debut
+    i=position_L(L,index)
+    Pour i allant de 1 a 26 faire 
+      si position_L(L)=i
+        W=index[i]
+      fin si
+    Fin Pour
+    return(W)
+  fin Fonction 
+     
+```
+
+### Algorithm pour les revolution 
+
+```
+procedure : revolution (list:
+  var: num_rot:entier
+Debut 
+  si num_rot=26
+    permut=rotor_permut(List:chaine)
+    num_rot=0
+  fin si
+  
+```
+
+
 # Diagramme de flux fonctionnel 
 
 ![enigma](enigma.svg)
