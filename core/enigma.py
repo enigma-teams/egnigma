@@ -21,71 +21,71 @@ def enigma_machine(message_in, message_out):
 
     def encrypt(word):
 
-        # Je détermine la position de la lettre dans l'aphabet
+        # I determine the position of the letter in the alphabet
         first_position = base.index(word)
 
         first, second, third = list(data.rotor.keys())
 
-        # Je Fait pivoter le rotor
+        # I spin the first rotor
         data.rotor_permute(first, 1)
 
-        # Je détermine si le lettre correspondant a la position
+        # I determine the letter corresponding to the position in the first rotor
         first_letter = data.get_letter(first, first_position)
 
-        # Je verifie si le premier rotor a déjà fait 26 tours
+        # I check if the first rotor has already done 26 revolutions
         if data.check_total_rotation(first):
-            # Je fait pivoter le second rotor
+            # I spin the second rotor
             data.rotor_permute(second, 1)
-            # Je remet le nombre de rotation du premier rotor a zéro
+            # I reset the rotation number of the first rotor to zero
             data.reset_rotation(first)
 
-        # Je détermine la position de la lettre {first_letter} dans l'aphabet
+        # I determine the position of the new letter in the alphabet
         second_position = base.index(first_letter)
 
-        # Je trouve la lettre corespondante a cette position dans le second rotor
+        # I find the letter corresponding to this position in the second rotor
         second_letter = data.get_letter(second, second_position)
 
-        # Je vérifie si le deuxième rotor a déjà fait 26 tours
+        # I check if the second rotor has already done 26 revolutions
         if data.check_total_rotation(second):
-            # Je fait pivoter le {third} rotor
+            # I spin the third rotor
             data.rotor_permute(third, 1)
-            # Je remet le nombre de rotation du {second} rotor à zéro
+            # I reset the rotation number of the second rotor to zero
             data.reset_rotation(second)
 
-        # Je détermine la position de {second_letter} dans l'alphabet
+        # I determine the position of the second letter in the alphabet
         third_position = base.index(second_letter)
 
-        # Je trouve la  lettre corespondante a la {third_position} dans {third} rotor
+        # I find the letter corresponding to the new position in the third rotor
         third_letter = data.get_letter(third, third_position)
 
-        # Je détermine la position de {third_letter} dans l'alphabet
+        # I determine the position of the third letter in the alphabet
         reflector_position = base.index(third_letter)
 
-        # Je détermine la lettre corespondante a {reflector_position} dans le reflector
+        # I determine the letter corresponding to this position in the reflector
         reflector_letter = data.get_letter_reflector(reflector_position)
 
-        # J'inverse le réflecteur et je détermine la position de {reflector_letter} dans le reflecteur
+        # I reverse the reflector and I determine the position of letter in the reflector
         inverse_reflector_position = data.get_inverse_reflector_position(reflector_letter)
 
-        # Je determine la lettre de position de {inverse_reflector_position} dans l'alphabet
+        # I determine the position of this new letter in the alphabet
         inverse_base_letter_alpha = base[inverse_reflector_position]
 
-        # Position de {inverse_base_letter_alpha} dans le third rotor
+        # I determine the position of the new letter in the third rotor
         inverse_third_position = data.get_index(third, inverse_base_letter_alpha)
 
-        # Je determine la lettre de position de {inverse_third_position} dans l'alphabet
+        # I determine the position letter of the new letter in the alphabet
         inverse_third_letter_alpha = base[inverse_third_position]
 
-        # Position de {inverse_third_letter_alpha} dans le second rotor
+        # I determine the position of the new letter in the second rotor
         inverse_second_position = data.get_index(second, inverse_third_letter_alpha)
 
-        # Je determine la lettre de position de {inverse_second_position} dans l'alphabet
+        # I determine the position letter of the new letter in the alphabet
         inverse_second_letter_alpha = base[inverse_second_position]
 
-        # Position de {inverse_second_letter_alpha} dans le first rotor
+        # I determine the position of the new letter in the first rotor
         inverse_first_position = data.get_index(first, inverse_second_letter_alpha)
 
-        # Je determine la lettre de position de {inverse_first_position} dans l'alphabet
+        # I determine the letter of this position in the alphabet
         response = base[inverse_first_position]
 
         return response
