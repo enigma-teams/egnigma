@@ -84,7 +84,7 @@ les différentes erreurs et appliquer les actions correctives
 
 # Diagramme de flux fonctionnel 
 
-![enigma](enigma.jpeg)
+![enigma](enigma.svg)
 
 # Interface de programmation 
 
@@ -92,13 +92,16 @@ les différentes erreurs et appliquer les actions correctives
 
 | Fonction      | Parametres | Descriptions     |
 | :---        |    :----:   |          :--- |
-| GENERATEUR(generate)      | it (iterateur)       | cette fonction permet de verifier les caractére du message entré et donc si un caractere est accentué il retire sont accent   |
-| LECTURE DU MESSAGE(lecture_message)   | filename et result        | elle ouvre le fichier ou est contenue le message(filename); appel la fonction GENERATE pour parcourir le message et retiré les accents sur les caractére accentués et met le resultat obtenue dans une liste (result)     |
-| SAUVEGARDE DU MESSAGE(save_message)   | filename et message_in       | le fichier contenant le message(filename) ouvert, il le sauvergarde en ecrivant le fichier dans message_in     |
+| LECTURE DU MESSAGE <ul><li>lecture_message</li></ul>   | <ul><li>filename</li></ul>  <ul><li>result</li></ul>        | elle ouvre le fichier ou est contenue le message`filename`; appel la fonction `Generate` pour parcourir le message et retiré les accents sur les caractére accentués et met le resultat obtenue dans une liste `result`     |
+| SAUVEGARDE DU MESSAGE <ul><li>save_message</li></ul>   | <ul><li>filename</li></ul>  <ul><li>message_in</li></ul>       | le fichier contenant le message`filename` ouvert, il le sauvergarde en ecrivant le fichier dans `message_in`     |
 | TELECHARGEMENT DES PARAMETRES <ul><li>load_params</li></ul>   | <ul><li>settings_file: `str`</li></ul>       | Upload des valeurs des rotors et réflectors contenu dans le `settings_file` La bibliothèque `json` pour lire dans le fichier settings_file    |
 | SELECTION DE ROTOR ET REFLECTEUR <ul><li>select_main_rotor_and_reflector</li></ul>   |<ul><li>selected_rotor : `[]`</li> <li>selected_reflector: `string`</li></ul>| Permet de  <ul><li>Faire le choix de 03 rotors parmis les 05 presents</li><li>Faire le choix d'un reflecteur parmis les 02 presents</li></ul>     |
 |PERMUTATION DES ROTORS <ul><li>rotor_permute</li></ul>   |<ul><li>rotor_name : la nom du rotor</li> <li>key: la clé de cryptage par défaut vaut 1</li></ul>| permet de permuter un rotor d'une position <ul><li>On insere le dernier élément de la liste au début du tableau `insert(0, value[-1])`</li><li>On retire le dernier élement de la liste `pop(-1)`</li></ul>   |
 |REFLECTEUR  <ul><li>get_letter_reflector(index)</li> <li>get_inverse_reflector_position(letter)</li></ul>    |<ul><li>letter</li> <li>index</li></ul> | Le réflecteur renvoie image d'une lettre, pour se faire on détermine <ul> <li>a lettre grace a sa positon `get_letter_reflector`</li> <li>on inverse le reflecteur et on renvoie la nouvelle position de la lettre dans le reflecteur `get_inverse_reflector_position` </li><li>cette position est utiliser pour le chemin inverse de algoritme</li></ul>  |
+  |TROUVER LES LETTRES <ul><li>get_letter</li></ul> | <ul><li>rotor_key</li></ul> <ul><li>index</li></ul>   |retourne la lettre contenue a une position `X` du rotor|
+|TROUVER LA POSITION <ul><li>get_index</li></ul>  | <ul><li>rotor_key</li></ul> <ul><li>letter</li></ul>   |retourne la position `X` d'une lettre dans un rotor|
+|VERIFIE NOMBRE DE TOURS <ul><li>check_total_rotation</li></ul> |<ul><li>rotor_key</li></ul>   |verifie si le rotor a fait `26 tours` si oui renvoie `True` sinon `False`|
+|REMISE A ZERO <ul><li>reset_rotation</li></ul> | <ul><li>rotor_key</li></ul>  |remet le nombre de tours d'un rotor a `zero`|
 
 ### Application
 
@@ -112,17 +115,14 @@ les différentes erreurs et appliquer les actions correctives
 ### LOGIQUE
 | Fonction    | Parametres  | Descriptions  |
 | :---        |    :----:   |          :--- |
-| INITIATEUR DE CRYPTAGE(Begin_encrypt) |     /   | Fonction mère contenant toutes les autres fonctions ci-dessous. Permet le démarrage du cryptage en faisant appel aux fonctions ci-dessous|
-| Téléchargement des paramètres (Data.load_params )| Settings_file     | Permet d’afficher la liste des rotors disponibles     |
-|Sélections des rotors(Selected_rotor)   |Tableau    |Demande a l’utilisateur de choisir 03 rotors et vérifie si sont choix est dans la liste ; après le choix d’un rotor il le retire de la liste pour que l’utilisateur n’est pas des rotors semblable dans son tableau|
-|Ordre des rotors (trie) | /  | S’assure que l’ordre des choix des rotors soit égal à l’ordre de leur position ensuite le met dans la liste |
-|Sélection du réflecteur (Reflector_choice) | dictionnaire  | Parcours la liste des réflecteurs et demande a l’utilisateur d’entrer la chaine caractère correspondant au réflecteur choisie et met dans un dictionnaire le réflecteur choisie  |
-|Message a crypté | Message = input (‘‘message= ’’)  | Demande a l’utilisateur d’entrer son message a encrypté/décrypté  |
-|Fichier du message a crypté | File_name = input (‘‘fichier= ’’) | Demande a l’utilisateur d’entrer du fichier contenant le message a encrypté/décrypté |
-|Sauvegarde du message (Data.save_message)  | (F ‘‘{file_name}.txt, message)et Out = [ ]  |Sauvegarde le message d’entrer/de sortie dans un fichier |
-|Sélections de rotors et réflecteur(Data.select_main_rotor_and_reflector) | Selected_rotor et Reflector_choice |Permet de faire appel au rotor et réflecteur sélectionné dans la fonction Begin_encrypt|
-|Lecture du message (Data.lecture_message) | F ‘‘{file_name}.Txt et out |Prends le message contenue dans le fichier et l’écrit dans la partie réservé au message a encrypté/décrypté|
-|Machine d’encryptage CESAR (Enigma_machine) | Out [0] et en |Fonction codage et décodage d’un message selon le positionnement des rotors et du réflecteur|
+| INITIATEUR DE CRYPTAGE <ul><li>Begin_encrypt</li></ul> |     /   | Fonction mère contenant toutes les autres fonctions ci-dessous. `Permet le démarrage du cryptage` en faisant appel aux fonctions ci-dessous|
+|Sélections des rotors <ul><li>Selected_rotor</li></ul>   | `Tableau`   |Demande a l’utilisateur de choisir 03 rotors et vérifie si sont choix est dans la liste ; après le choix d’un rotor il le retire de la liste pour que l’utilisateur n’est pas des rotors semblable dans son tableau|
+|Ordre des rotors <ul><li>trie</li></ul> | /  | S’assure que l’ordre des choix des rotors soit égal à l’ordre de leur position ensuite le met dans la liste |
+|Sélection du réflecteur <ul><li>Reflector_choice</li></ul> | `dictionnaire`  | Parcours la liste des réflecteurs et demande a l’utilisateur d’entrer la chaine caractère correspondant au réflecteur choisie et met dans un dictionnaire le réflecteur choisie  |
+|Sauvegarde du message <ul><li>Data.save_message</li></ul>  | <ul><li>F ‘‘`{file_name }.txt`", message</li></ul>  <ul><li>Out = `[]`</li></ul>  |Sauvegarde le message `d’entrer/de sortie` dans un fichier |
+|Sélections de rotors et réflecteur<ul><li>Data.select_main_rotor_and_reflector</li></ul> | <ul><li>Selected_rotor  <ul><li>Reflector_choice |Permet de faire appel au rotor et réflecteur sélectionné dans la fonction Begin_encrypt|
+|Lecture du message <ul><li>Data.lecture_message</li></ul> | <ul><li>F ‘‘`{file_name}.Txt`</li></ul>  <ul><li>out</li></ul> |Prends le message contenue dans le fichier et l’écrit dans la partie réservé au message a encrypté/décrypté|
+|Machine d’encryptage CESAR <ul><li>Enigma_machine</li></ul> | <ul><li>Out [0]</li></ul> <ul><li>en</li></ul> |Fonction codage et décodage d’un message selon le positionnement des rotors et du réflecteur|
 
 
 # Tests
