@@ -42,20 +42,46 @@ def init_rotor_and_reflector(rotors, reflecteurs):
 def select_main_rotor_and_reflector(selected_rotor=["RA", "RB", "RC"], selected_reflector="RFB"):
     global rotor
     global reflector
-    rotor = {s: rotor.get(s) for s in selected_rotor}
+    rotor = {s: {"value": rotor.get(s), "rotation": 0}for s in selected_rotor}
     reflector = reflector.get(selected_reflector)
 
 
 def rotor_permute(rotor_name, key):
     global rotor
-    rotor_value = list(rotor.get(rotor_name))
+    value, rotation = rotor.get(rotor_name).values()
+    value = list(value)
     for i in range(key):
-        rotor_value.insert(0, rotor_value[-1])
-        rotor_value.pop(-1)
+        value.insert(0, value[-1])
+        value.pop(-1)
 
-    rotor.update({rotor_name: "".join(rotor_value)})
+    rotor.update({rotor_name: {"value": "".join(value), "rotation": rotation + 1}})
 
 
-def make_reflector(character, key):
-    index = list(reflector).index(character)
-    return reflector[(index + key) % 26]
+def get_letter(rotor_key, index):
+    value, rotation = rotor.get(rotor_key).values()
+    return value[index]
+
+
+def get_index(rotor_key, letter):
+    value, rotation = rotor.get(rotor_key).values()
+    return list(value).index(letter)
+
+
+def check_total_rotation(rotor_key):
+    value, rotation = rotor.get(rotor_key).values()
+    if rotation == 26:
+        return True
+    return False
+
+
+def reset_rotation(rotor_key):
+    value, rotation = rotor.get(rotor_key).values()
+    rotor.update({rotor_key: {"value": value, "rotation": 0}})
+
+
+def get_letter_reflector(index):
+    return reflector[index]
+
+
+def get_inverse_reflector_position(letter):
+    return list(reflector[::-1]).index(letter)
