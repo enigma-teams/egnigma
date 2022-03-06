@@ -47,6 +47,41 @@ les différentes erreurs et appliquer les actions correctives
 
 # Algorithmique
 
+### Principes de cryptage d'un mot
+<ul>
+  <li>Je détermine la position de la lettre dans l'alphabet</li>
+  <li>Je fait pivoter le premier rotor</li>
+  <li>Je détermine la lettre correspondant a la position dans le premier rotor</li>
+  <li>Je verifie si le premier rotor a déjà fait 26 tours
+    <ol>
+      Si oui
+      <li>Je fait pivoter le second rotor</li>
+      <li>Je remet le nombre de rotation du premier rotor a zéro</li>
+    </ol>
+  </li>
+  <li>Je détermine la position de la nouvelle lettre  dans l'alphabet</li>
+  <li>Je trouve la lettre correspondante à cette position dans le second rotor</li>
+  <li>Je vérifie si le deuxième rotor a déjà fait 26 tours
+    <ol>
+      Si oui
+      <li>Je fait pivoter le troisième rotor</li>
+      <li>Je remet le nombre de rotation du second rotor à zéro</li>
+    </ol>
+  </li>
+  <li>Je détermine la position de la second lettre dans l'alphabet</li>
+  <li>Je trouve la lettre correspondante a la nouvelle position dans le troisième rotor</li>
+  <li>Je détermine la position de la troisième lettre dans l'alphabet</li>
+  <li>Je détermine la lettre correspondante a cette position dans le reflector</li>
+  <li>J'inverse le réflecteur et je détermine la position de letter dans le reflecteur</li>
+  <li>Je determine la position de cette nouvelle lettre dans l'alphabet</li>
+  <li>Je determine la position de la nouvelle lettre dans le troisième rotor</li>
+  <li>Je determine la lettre de position de la nouvelle lettre dans l'alphabet</li>
+  <li>Je détermine la position de la nouvelle lettre dans le second roto</li>
+  <li>Je determine la lettre de position de la nouvelle lettre dans l'alphabet</li>
+  <li>Je détermine la position de la nouvelle lettre dans le premier rotor</li>
+  <li>Je determine la lettre de cette position de  dans l'alphabet</li>
+</ul>
+
 # Diagramme de flux fonctionnel 
 
 ![enigma](enigma.jpeg)
@@ -55,16 +90,15 @@ les différentes erreurs et appliquer les actions correctives
 
 ### Data
 
-| Fonction    | Parametres  | Descriptions  |
+| Fonction      | Parametres | Descriptions     |
 | :---        |    :----:   |          :--- |
-| GENERATEUR(generate)    |     it (iterateur)      | cette fonction permet de verifier les caractére du message entré et donc si un caractere est accentué il retire sont accent|
-| LECTURE DU MESSAGE(lecture_message)   | filename et result      | elle ouvre le fichier ou est contenue le message(filename); appel la fonction GENERATE pour parcourir le message et retiré les accents sur les caractére accentués et met le resultat obtenue dans une liste (result)     |
-|SAUVEGARDE DU MESSAGE(save_message)   |filename et message_in    |le fichier contenant le message(filename) ouvert, il le sauvergarde en ecrivant le fichier dans message_in|
-|TELECHARGEMENT DES PARAMETRE (load_params) | settings_file  | permet d'ouvrir la bibliothéque json ou sont contenue les differents rotors(05) et reflecteurs(02) .puis fait appel a la fonction d'initiation des rotors et reflecteurs(init_rotor_and_reflector) pour telecharger la bibliotheque json dans le fichier settings_file|
-|INITIATEUR DE ROTOR ET REFLECTEUR (init_rotor_and_reflector) | rotors et reflecteurs  | elle permet d'ouvrir le fichier contenant les rotors et reflecteurs puis convertit chaque element du fichier(unicode) en chaine de caractere  |
-| SELECTION DE ROTOR ET REFLECTEUR (select_main_rotor_and_reflector) | selected_rotor et selected_reflector  | permet de faire le choix de 03 rotors parmis les 05 presents et aussi le choix d'un reflecteur parmis les 02 presents et sa utilise l'ordre du choix respectivement sur l'ordre des rotors  |
-|PERMUTATION DES ROTORS (rotor_permute) | rotor_name et key | permet de permuter chaque rotor aprés qu'un caractére y soit passé en prenant un nombre de carctére(nombre etant egale a la clés)au debut de la chaine puis le renvoie en fin de chaine  |
-|FONCTION DU REFLECTEUR (make_reflector)  | character et key  | lorque le charactére arrive au niveau du reflecteur elle se repere dans le reflecteur puis prends son indice et l'additionne a la clés pour trouvé la nouvelle correspondances en sortie du caractére en entrée  |
+| GENERATEUR(generate)      | it (iterateur)       | cette fonction permet de verifier les caractére du message entré et donc si un caractere est accentué il retire sont accent   |
+| LECTURE DU MESSAGE(lecture_message)   | filename et result        | elle ouvre le fichier ou est contenue le message(filename); appel la fonction GENERATE pour parcourir le message et retiré les accents sur les caractére accentués et met le resultat obtenue dans une liste (result)     |
+| SAUVEGARDE DU MESSAGE(save_message)   | filename et message_in       | le fichier contenant le message(filename) ouvert, il le sauvergarde en ecrivant le fichier dans message_in     |
+| TELECHARGEMENT DES PARAMETRES <ul><li>load_params</li></ul>   | <ul><li>settings_file: `str`</li></ul>       | Upload des valeurs des rotors et réflectors contenu dans le `settings_file` La bibliothèque `json` pour lire dans le fichier settings_file    |
+| SELECTION DE ROTOR ET REFLECTEUR <ul><li>select_main_rotor_and_reflector</li></ul>   |<ul><li>selected_rotor : `[]`</li> <li>selected_reflector: `string`</li></ul>| Permet de  <ul><li>Faire le choix de 03 rotors parmis les 05 presents</li><li>Faire le choix d'un reflecteur parmis les 02 presents</li></ul>     |
+|PERMUTATION DES ROTORS <ul><li>rotor_permute</li></ul>   |<ul><li>rotor_name : la nom du rotor</li> <li>key: la clé de cryptage par défaut vaut 1</li></ul>| permet de permuter un rotor d'une position <ul><li>On insere le dernier élément de la liste au début du tableau `insert(0, value[-1])`</li><li>On retire le dernier élement de la liste `pop(-1)`</li></ul>   |
+|REFLECTEUR  <ul><li>get_letter_reflector(index)</li> <li>get_inverse_reflector_position(letter)</li></ul>    |<ul><li>letter</li> <li>index</li></ul> | Le réflecteur renvoie image d'une lettre, pour se faire on détermine <ul> <li>a lettre grace a sa positon `get_letter_reflector`</li> <li>on inverse le reflecteur et on renvoie la nouvelle position de la lettre dans le reflecteur `get_inverse_reflector_position` </li><li>cette position est utiliser pour le chemin inverse de algoritme</li></ul>  |
 
 ### Application
 
@@ -205,6 +239,6 @@ ce programme a été un grand challenge pour nous;mais elle nous a appris a mait
 
 # Bibliographie
 
-How to build an enigma machine virtualisation in python. (2021). Medium. Consulté le 2022, à l’adresse https://medium.com/analytics-vidhya/how-to-build-an-enigma-machine-virtualisation-in-python-b5476a1fd922
+Machine d'énigme de papier. (24 févr. 2017). Youtube Consulté le 2022, à l’adresse https://www.youtube.com/watch?v=UKbP3Rjxhy0
 
 Python 3 : des fondamentaux aux concepts avancés du langage. (s. d.). Python 3 : des fondamentaux aux concepts avancés du langage. Consulté le 2022, à l’adresse https://lms.fun-mooc.fr/courses/course-v1:UCA+107001+session02/info
