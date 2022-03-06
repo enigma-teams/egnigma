@@ -84,7 +84,7 @@ les différentes erreurs et appliquer les actions correctives
 
 # Diagramme de flux fonctionnel 
 
-![enigma](enigma.jpeg)
+![enigma](enigma.svg)
 
 # Interface de programmation 
 
@@ -92,13 +92,16 @@ les différentes erreurs et appliquer les actions correctives
 
 | Fonction      | Parametres | Descriptions     |
 | :---        |    :----:   |          :--- |
-| GENERATEUR(generate)      | it (iterateur)       | cette fonction permet de verifier les caractére du message entré et donc si un caractere est accentué il retire sont accent   |
-| LECTURE DU MESSAGE(lecture_message)   | filename et result        | elle ouvre le fichier ou est contenue le message(filename); appel la fonction GENERATE pour parcourir le message et retiré les accents sur les caractére accentués et met le resultat obtenue dans une liste (result)     |
-| SAUVEGARDE DU MESSAGE(save_message)   | filename et message_in       | le fichier contenant le message(filename) ouvert, il le sauvergarde en ecrivant le fichier dans message_in     |
+| LECTURE DU MESSAGE <ul><li>lecture_message</li></ul>   | <ul><li>filename</li></ul>  <ul><li>result</li></ul>        | elle ouvre le fichier ou est contenue le message`filename`; appel la fonction `Generate` pour parcourir le message et retiré les accents sur les caractére accentués et met le resultat obtenue dans une liste `result`     |
+| SAUVEGARDE DU MESSAGE <ul><li>save_message</li></ul>   | <ul><li>filename</li></ul>  <ul><li>message_in</li></ul>       | le fichier contenant le message`filename` ouvert, il le sauvergarde en ecrivant le fichier dans `message_in`     |
 | TELECHARGEMENT DES PARAMETRES <ul><li>load_params</li></ul>   | <ul><li>settings_file: `str`</li></ul>       | Upload des valeurs des rotors et réflectors contenu dans le `settings_file` La bibliothèque `json` pour lire dans le fichier settings_file    |
 | SELECTION DE ROTOR ET REFLECTEUR <ul><li>select_main_rotor_and_reflector</li></ul>   |<ul><li>selected_rotor : `[]`</li> <li>selected_reflector: `string`</li></ul>| Permet de  <ul><li>Faire le choix de 03 rotors parmis les 05 presents</li><li>Faire le choix d'un reflecteur parmis les 02 presents</li></ul>     |
 |PERMUTATION DES ROTORS <ul><li>rotor_permute</li></ul>   |<ul><li>rotor_name : la nom du rotor</li> <li>key: la clé de cryptage par défaut vaut 1</li></ul>| permet de permuter un rotor d'une position <ul><li>On insere le dernier élément de la liste au début du tableau `insert(0, value[-1])`</li><li>On retire le dernier élement de la liste `pop(-1)`</li></ul>   |
 |REFLECTEUR  <ul><li>get_letter_reflector(index)</li> <li>get_inverse_reflector_position(letter)</li></ul>    |<ul><li>letter</li> <li>index</li></ul> | Le réflecteur renvoie image d'une lettre, pour se faire on détermine <ul> <li>a lettre grace a sa positon `get_letter_reflector`</li> <li>on inverse le reflecteur et on renvoie la nouvelle position de la lettre dans le reflecteur `get_inverse_reflector_position` </li><li>cette position est utiliser pour le chemin inverse de algoritme</li></ul>  |
+  |TROUVER LES LETTRES <ul><li>get_letter</li></ul> | <ul><li>rotor_key</li></ul> <ul><li>index</li></ul>   |retourne la lettre contenue a une position `X` du rotor|
+|TROUVER LA POSITION <ul><li>get_index</li></ul>  | <ul><li>rotor_key</li></ul> <ul><li>letter</li></ul>   |retourne la position `X` d'une lettre dans un rotor|
+|VERIFIE NOMBRE DE TOURS <ul><li>check_total_rotation</li></ul> |<ul><li>rotor_key</li></ul>   |verifie si le rotor a fait `26 tours` si oui renvoie `True` sinon `False`|
+|REMISE A ZERO <ul><li>reset_rotation</li></ul> | <ul><li>rotor_key</li></ul>  |remet le nombre de tours d'un rotor a `zero`|
 
 ### Application
 
@@ -112,27 +115,45 @@ les différentes erreurs et appliquer les actions correctives
 ### LOGIQUE
 | Fonction    | Parametres  | Descriptions  |
 | :---        |    :----:   |          :--- |
-| INITIATEUR DE CRYPTAGE(Begin_encrypt) |     /   | Fonction mère contenant toutes les autres fonctions ci-dessous. Permet le démarrage du cryptage en faisant appel aux fonctions ci-dessous|
-| Téléchargement des paramètres (Data.load_params )| Settings_file     | Permet d’afficher la liste des rotors disponibles     |
-|Sélections des rotors(Selected_rotor)   |Tableau    |Demande a l’utilisateur de choisir 03 rotors et vérifie si sont choix est dans la liste ; après le choix d’un rotor il le retire de la liste pour que l’utilisateur n’est pas des rotors semblable dans son tableau|
-|Ordre des rotors (trie) | /  | S’assure que l’ordre des choix des rotors soit égal à l’ordre de leur position ensuite le met dans la liste |
-|Sélection du réflecteur (Reflector_choice) | dictionnaire  | Parcours la liste des réflecteurs et demande a l’utilisateur d’entrer la chaine caractère correspondant au réflecteur choisie et met dans un dictionnaire le réflecteur choisie  |
-|Message a crypté | Message = input (‘‘message= ’’)  | Demande a l’utilisateur d’entrer son message a encrypté/décrypté  |
-|Fichier du message a crypté | File_name = input (‘‘fichier= ’’) | Demande a l’utilisateur d’entrer du fichier contenant le message a encrypté/décrypté |
-|Sauvegarde du message (Data.save_message)  | (F ‘‘{file_name}.txt, message)et Out = [ ]  |Sauvegarde le message d’entrer/de sortie dans un fichier |
-|Sélections de rotors et réflecteur(Data.select_main_rotor_and_reflector) | Selected_rotor et Reflector_choice |Permet de faire appel au rotor et réflecteur sélectionné dans la fonction Begin_encrypt|
-|Lecture du message (Data.lecture_message) | F ‘‘{file_name}.Txt et out |Prends le message contenue dans le fichier et l’écrit dans la partie réservé au message a encrypté/décrypté|
-|Machine d’encryptage CESAR (Enigma_machine) | Out [0] et en |Fonction codage et décodage d’un message selon le positionnement des rotors et du réflecteur|
+| INITIATEUR DE CRYPTAGE <ul><li>Begin_encrypt</li></ul> |     /   | Fonction mère contenant toutes les autres fonctions ci-dessous. `Permet le démarrage du cryptage` en faisant appel aux fonctions ci-dessous|
+|Sélections des rotors <ul><li>Selected_rotor</li></ul>   | `Tableau`   |Demande a l’utilisateur de choisir 03 rotors et vérifie si sont choix est dans la liste ; après le choix d’un rotor il le retire de la liste pour que l’utilisateur n’est pas des rotors semblable dans son tableau|
+|Ordre des rotors <ul><li>trie</li></ul> | /  | S’assure que l’ordre des choix des rotors soit égal à l’ordre de leur position ensuite le met dans la liste |
+|Sélection du réflecteur <ul><li>Reflector_choice</li></ul> | `dictionnaire`  | Parcours la liste des réflecteurs et demande a l’utilisateur d’entrer la chaine caractère correspondant au réflecteur choisie et met dans un dictionnaire le réflecteur choisie  |
+|Sauvegarde du message <ul><li>Data.save_message</li></ul>  | <ul><li>F ‘‘`{file_name }.txt`", message</li></ul>  <ul><li>Out = `[]`</li></ul>  |Sauvegarde le message `d’entrer/de sortie` dans un fichier |
+|Sélections de rotors et réflecteur<ul><li>Data.select_main_rotor_and_reflector</li></ul> | <ul><li>Selected_rotor  <ul><li>Reflector_choice |Permet de faire appel au rotor et réflecteur sélectionné dans la fonction Begin_encrypt|
+|Lecture du message <ul><li>Data.lecture_message</li></ul> | <ul><li>F ‘‘`{file_name}.Txt`</li></ul>  <ul><li>out</li></ul> |Prends le message contenue dans le fichier et l’écrit dans la partie réservé au message a encrypté/décrypté|
+|Machine d’encryptage CESAR <ul><li>Enigma_machine</li></ul> | <ul><li>Out [0]</li></ul> <ul><li>en</li></ul> |Fonction codage et décodage d’un message selon le positionnement des rotors et du réflecteur|
 
 
 # Tests
-Dans cette rubrique, nous devrons réaliser des tests afin d'évaluer notre programme.
+Dans cette rubrique, nous verons si notre programme fonctionne correctement.
 
-Tout d'abord le est l'une des parties des plus importante du programme car c'est ici que l'on vérifie sous défférents axes si le code réalisé est optimal
+Tout d'abord le test est l'une des parties des plus importante du developpement car c'est ici que nous verons si le programme répond au besoin.
+Comme tout projet le besoin ou but ici est de realiser le codage et le décryptage d'un message en utilisant l'algorithme egnigma.
+
+Pour réaliser notre test, nous allons coder le message "Bonjour".
+
+Afin de pouvoir realiser ce projet nous avons conçu une interface user, permettant à l'utilisateur d'interagir avec la machine.
+l'interface conçue est constitué d'un "Menu de selection" qui renseigne l'utilisateur sur la procédure à entreprendre afin de réaliser au mieux soit le codage, soit le décryptage du message.
+
+***Codage du message***
+
+- une fois le programme lancé, il apparaît un menu de selection ci-dessous:
+```
+Menu de sélection
+
+1 - Lecture Message                 en prenant le choix=1 on realise la lecture du message
+
+2 - Enregistre Message              le choix=2 permet à l'utilisateur de realiser l'enregistrement du message
+
+3 - Cryptage/Decryptage             le choix=3 ici demande à l'utilisateur s'il souhaite faire le cryptage ou le décryptage
+
+4 - Quitter                         le choix=4 provoque l'arrêt du programme
+```
 
 - une fois le programme lancé la rubrique "menu de sélection" s'affiche et là nous avons la possibilité de faire un choix sur l'action que nous désirons entreprendre. 
 Ici en faisant le choix=2 nous effectuons l'enregistrement du Message
-
+```
 Menu de sélection
 
 1 - Lecture Message
@@ -146,17 +167,17 @@ Menu de sélection
 choix = 2
 
 Message = bonjour
-
+```
 
 - Une fois le message écrit, le programme demande d'entrer le fichier de sauvegarde et le message est enregistré automatiquement dans le fichier.
-
+```
 Fichier de sauvegarde = bonjour.txt
 
 Le message bonjour a été sauvegarder dans le fichier bonjour.txt.txt
+```
 
-
-- une fois le message ecrit et sauvegardé dans le fichier, de nouveau le menu de sélection apparait et ici on procède à la lecture du fichier
-
+- Le message ecrit et sauvegardé dans le fichier, de nouveau le menu de sélection apparait et ici on procède à la lecture du fichier
+```
 Menu de sélection
 
 1 - Lecture Message
@@ -172,10 +193,10 @@ choix = 1
 File Name : bonjour.txt
 
 ['BONJOUR']
-
+```
 
 - Lorsque le fichier a été lu, de nouveau le menu de sélection apparait et là il faut choisir entre cryptage et décryptoage en entrant le choix= 3 ainsi le programme realise soit le cryptage ou le décryptage
-
+```
 Menu de sélection
 
 1 - Lecture Message
@@ -187,10 +208,10 @@ Menu de sélection
 4 - Quitter
 
 choix = 3
-
+```
 
 - Ce qui suit est le choix des rotors et par défaut il faut choisir 3 parmis les 5 rotors. la fonction permute realisera la rotation des différents rotors en fonction de la clés.
-
+```
 1 - RA
 
 2 - RB
@@ -201,23 +222,18 @@ choix = 3
 
 5 - RE
 
-Rotor 1 = 1
-
-Rotor 2 = 2
-
-Rotor 3 = 3
+Les rotors choisis ici sont:
 
 Rotors : ['RA', 'RB', 'RC']
-
+```
 
 - Après avoir réalisé le choix des rotors nous devons éffectuer le choix du reflecteur et c'est ici que sera etablit une correspondante entre le message écrit et le cryptage et puis renvérra le message crypté
-
+```
 1 - RFA
 
 2 - RFB
 
-Reflector = 2
-
+le Reflector choisit est
 Reflector = RFB
 
 Message = bonjour
@@ -229,7 +245,87 @@ message = BONJOUR
 message codé : UFBNFRA
 
 Process finished with exit code 0
-  
+``` 
+***Décryptage***
+
+Pour ce qui est du décryptage, c'est la partie où sera déchiffré le sens du texte codé, le traduire en claire pour en déceler son sens caché au fond.
+Le besoin ici est celui d'acceder à l'information cryptée. La procédure est la même que celle du cryptage , à la différence que l'utilisateur devra 
+tout d'abord lire le message crypté ensuite enclencher l'option de décryptage.
+
+Réalisons le test de décryptage
+```
+Menu de sélection
+
+1 - Lecture Message                 en prenant le choix=1 on realise la lecture du message
+
+2 - Enregistre Message              le choix=2 permet à l'utilisateur de realiser l'enregistrement du message
+
+3 - Cryptage/Decryptage             le choix=3 ici demande à l'utilisateur s'il souhaite faire le cryptage ou le décryptage
+
+4 - Quitter                         le choix=4 provoque l'arrêt du programme
+```
+
+- le programme lancé, on réalise tout d'abord la lecture du message 
+```
+Menu de sélection
+
+1 - Lecture Message
+
+2 - Enregistre Message
+
+3 - Cryptage/Decryptage
+
+4 - Quitter
+
+choix = 1
+
+File Name : bonjour.txt
+
+['UFBNFRA']
+```
+- Dès lors que le programme a lu le message, la prochaine étape est de faire le décryptage en rentrant le choix=3
+- On réalise le choix des rotors et par défaut il faut choisir 3 parmis les 5 rotors et ceci doit-être suivant les ceux utilisé lors du cryptage
+```
+1 - RA
+
+2 - RB
+
+3 - RC
+
+4 - RD
+
+5 - RE
+
+Les rotors choisis ici sont:
+
+Rotors : ['RA', 'RB', 'RC']
+```
+- Il ne reste plus qu'a faire le choix du reflecteur et la correspondance entre le message crypté et l'information recherché est etablit et le message réapparaît en clair
+```
+1 - RFA
+
+2 - RFB
+
+le Reflector choisit est
+Reflector = RFB
+
+Message = UFBNFRA
+
+Fichier = bonjour.txt
+
+message = UFBNFRA
+
+message codé : BONJOUR
+
+Process finished with exit code 0
+``` 
+***conclusion***
+- Au vue de ce tout ce qui précède il apparaît que le message "BONJOUR" qui a été codé en "UFBNFRA" ce qui nous permet de dire que la procédure de cryptage marche parfaitement.
+- Une tentative de décryptage du code "UFBNFRA" renvoi en message codé: BONJOUR qui correspond au message crypté au depart.
+
+Il ne faudrait pas oublié que pour que ceci soit rendu possible il faudrait que le choix de rotors utilisé lors du Cryptage soit le même que celui utilisé lors du décryptage 
+ainsi celui si sera possible.
+On peut donc conclure que le programme fonctionne parfaitement.
 # Questions 
 
 # Conclusion 
