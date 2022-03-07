@@ -48,7 +48,7 @@ les différentes erreurs et appliquer les actions correctives
 # Algorithmique
 
 ### Principes de cryptage d'un mot
-<ul>
+<ol>
   <li>Je détermine la position de la lettre dans l'alphabet</li>
   <li>Je fait pivoter le premier rotor</li>
   <li>Je détermine la lettre correspondant a la position dans le premier rotor</li>
@@ -74,13 +74,179 @@ les différentes erreurs et appliquer les actions correctives
   <li>Je détermine la lettre correspondante a cette position dans le reflector</li>
   <li>J'inverse le réflecteur et je détermine la position de letter dans le reflecteur</li>
   <li>Je determine la position de cette nouvelle lettre dans l'alphabet</li>
-  <li>Je determine la position de la nouvelle lettre dans le troisième rotor</li>
+  <li>Je determine la position selon la nouvelle lettre dans le troisième rotor</li>
   <li>Je determine la lettre de position de la nouvelle lettre dans l'alphabet</li>
-  <li>Je détermine la position de la nouvelle lettre dans le second roto</li>
+  <li>Je détermine la position selon la nouvelle lettre dans le second roto</li>
   <li>Je determine la lettre de position de la nouvelle lettre dans l'alphabet</li>
-  <li>Je détermine la position de la nouvelle lettre dans le premier rotor</li>
-  <li>Je determine la lettre de cette position de  dans l'alphabet</li>
-</ul>
+  <li>Je détermine la position selon la nouvelle lettre dans le premier rotor</li>
+  <li>Je determine la lettre de cette position  dans l'alphabet</li>
+</ol>
+
+
+### Algorithm pour determiner position
+
+```
+fonction :position_L(L:caracter,index:Caracter):entier
+  var: i:entier
+       posi:entier
+  Debut 
+    pour i allant de 1 a 26 faire
+      si index[i]=L alors
+          posi=i
+      finsi 
+    fin pour
+   return posi
+  fin fonction
+
+```
+
+### Algorithm pour pivoter rotor
+
+```
+Procedure: permute(Var Index:carac)
+  var: permut:entier
+ Debut
+  permut=rotor_permut(List:chaine)
+ Fin Procedure
+
+```
+
+### Algorithm pour correspondre 
+
+```
+Fonction: correspondre(index:carac)
+  var : i : entier
+        L : carac
+        index:carac
+        W:caracter
+  Debut
+    i=position_L(L,index)
+    Pour i allant de 1 a 26 faire 
+      si position_L(L)=i
+        W==index[i]
+      fin si
+    Fin Pour
+    return(W)
+  fin Fonction 
+     
+```
+
+### Algorithm pour les revolution 
+
+```
+Procedure : revolution (list:entier,numrot:entier)
+Debut 
+  si num_rot=26
+    permut=rotor_permut(List:chaine)
+    num_rot=0
+  fin si
+ fin procedure 
+  
+```
+
+### Algorithm pour determier la position de la nouvelle lettre 
+
+```
+  
+  fonction : position(L:caracter,index:Caracter):entier
+  var: i:entier
+       nposi:entier
+  Debut 
+    pour i allant de 1 a 26 faire
+      si index[i]=L alors
+          posi=i
+      finsi 
+    fin pour
+   return posi
+  fin fonction
+```
+
+### Algorithm pour trouve la lettre correspondante à cette position dans le second rotor
+
+```
+Fonction: correspondre(index:carac,posi)
+  var : i : entier
+        L : carac
+        index:carac
+        W:caracter
+  Debut
+    i=position_L(L,index)
+    Pour i allant de 1 a 26 faire 
+      si position_L(L)=i
+        W=index[i]
+      fin si
+    Fin Pour
+    return(W)
+  fin Fonction 
+     
+```
+### Algorithm pour les revolution second rotor
+
+```
+Procedure : revolution (list:entier,numrot:entier)
+Debut 
+  si num_rot=26
+    permut=rotor_permut(List:chaine)
+    num_rot=0
+  fin si
+ fin procedure 
+  
+```
+
+### Algorithm pour determiner positionde la troisieme lettre
+
+```
+fonction :position_L(L:caracter,index:Caracter):entier
+  var: i:entier
+       posi:entier
+  Debut 
+    pour i allant de 1 a 26 faire
+      si index[i]=L alors
+          posi=i
+      finsi 
+    fin pour
+   return posi
+  fin fonction
+
+```
+
+### Algorithm pour trouve la lettre correspondante à cette position dans le troiseme  rotor
+
+```
+Fonction: correspondre(index:carac,posi)
+  var : i : entier
+        L : carac
+        index:carac
+        W:caracter
+  Debut
+    i=position_L(L,index)
+    Pour i allant de 1 a 26 faire 
+      si position_L(L)=i
+        W=index[i]
+      fin si
+    Fin Pour
+    return(W)
+  fin Fonction 
+     
+```
+## Algorithm pour determiner position troisieme lettre dans laphabet
+
+```
+fonction :position_alph(L:caracter,base:index):entier
+  var: i:entier
+       posi:entier
+  Debut 
+    pour i allant de 1 a 26 faire
+      si i=base.index[L] alors
+          posi=i
+      finsi 
+    fin pour
+   return posi
+  fin fonction
+
+```
+
+
 
 # Diagramme de flux fonctionnel 
 
